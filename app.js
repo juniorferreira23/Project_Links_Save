@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const path = require('path')
 
-const { connectDb } = require('./configuration/connectionDB')
+const connectDb = require('./configuration/connectionDB')
 const linkRoute = require('./routes/linkRoute')
 
 const PORT = 8000
