@@ -13,7 +13,7 @@
 
     <% if(links){ %> 
         <% for(let i = 0; i < links.length; i++){ %> 
-            <div id="<%= links[i].id %> ">
+            <div id="<%= links[i].id %>">
                 <h3><%= links[i].title %></h3>
                 <div><%= links[i].description %></div>
                 <div><a href="<%= links[i].url %>"><%= links[i].url %></a></div>
@@ -24,14 +24,17 @@
 
     <script>
         const deleteLink = (id) => {
-            
             fetch('/' + id, {method: 'delete'}).then( res => {
-                
                 if(res.status == 200){
                     res.text().then( idLink => {
-                        console.log(idLink)
                         const child = document.getElementById(idLink)
-                        console.log(child)
+                        if(child.parentNode){
+                            child.parentNode.removeChild(child)
+                        }
+                    })
+                }else{
+                    res.json().then( error => {
+                        console.log(error.message)
                     })
                 }
             })
