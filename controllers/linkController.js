@@ -4,7 +4,7 @@ const redirectLink = async (req, res) => {
     const title = req.params.title
     try {
         const docLink = await Link.findOne({title})
-        res.redirect(docLink.url)
+        res.status(200).redirect(docLink.url)
     } catch (error) {
         res.status(400).send('<h2>Link não encontrado :(</h2>')
     }
@@ -16,7 +16,7 @@ const addLink = async (req, res) => {
         await docLink.save()
         res.status(201).redirect('/all')
     } catch (error) {
-        res.render('index', { error, body: docLink })
+        res.status(400).render('index', { error, body: docLink })
     }
 }
 
@@ -32,11 +32,23 @@ const allLinks = async (req, res) => {
 const deleteLink = async (req, res) => {
     const idLink = req.params.id
     try {
-        await Link.findByIdAndDelete({ _id: idLink })
+        await Link.findByIdAndDelete(idLink)
         res.status(200).send(idLink)
     } catch (error) {
         res.status(400).send(error)
     }
 }
 
-module.exports = { addLink, redirectLink, allLinks, deleteLink}
+const loadEditLink = async (req, res) => {
+    const idLink = req.params.id
+    try {
+        const doc = await Link.findById(idLink)
+        console.log(doc)
+        res.status(200).render('edit', {body: doc, error: false})
+    } catch (error) {
+        res.status(400).send(error)
+    }
+}
+
+
+module.exports = { addLink, redirectLink, allLinks, deleteLink, loadEditLink}
