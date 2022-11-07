@@ -1,27 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Links</title>
     <link rel="shortcut icon" href="/" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
-    <h1>All Links</h1>
-    <a href="http://localhost:8000">Add Link</a>
+    <div class="container w-50">
+        <h1>All Links</h1>
+        <a href="http://localhost:8000">Add Link</a>
 
-    <% if(links){ %> 
-        <% for(let i = 0; i < links.length; i++){ %> 
-            <div id="<%= links[i].id %>">
-                <h3><%= links[i].title %></h3>
-                <div><%= links[i].description %></div>
-                <div><a href="<%= links[i].url %>"><%= links[i].url %></a></div>
-                <button onclick="deleteLink('<%= links[i].id %>')">Delete</button>
-                <button><a href="http://localhost:8000/edit/<%= links[i].id %> ">Edit</a></button>
-            </div>
+        <% if(links){ %> 
+            <% for(let i = 0; i < links.length; i++){ %> 
+                <div id="<%= links[i].id %>" class="card p-3 mt-1 d-flex flex-row justify-content-between align-items-center">
+                    <div>
+                        <h3><%= links[i].title %></h3>
+                        <div><%= links[i].description %></div>
+                        <div><a href="<%= links[i].url %>"><%= links[i].url %></a></div>
+                        <div>clicks: <%= links[i].clicks %> </div>
+                    </div>
+                    <div>
+                        <a class="btn btn-info text-light" href="http://localhost:8000/edit/<%= links[i].id %> ">Edit</a>
+                        <button class="btn btn-danger" onclick="deleteLink('<%= links[i].id %>')">Delete</button>
+                    </div>
+                    <% if(err.message){ %> 
+                        <%= err.message %> 
+                    <% } %> 
+                </div>
+            <% } %> 
         <% } %> 
-    <% } %> 
+    </div>
 
     <script>
         const deleteLink = (id) => {
