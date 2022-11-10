@@ -65,7 +65,7 @@ O projeto trata-se de um salvador de links, onde através da técnica de operar 
 * Arquitetura MVC
 * MongoDB (Banco de Dados NO-SQL)
 
-# License
+# Licença
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/juniorferreira23/Project_Save_Links/blob/main/LICENSE)
 
 
