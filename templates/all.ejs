@@ -11,7 +11,7 @@
 <body>
     <div class="container w-50">
         <h1>All Links</h1>
-        <a href="http://localhost:8000">Add Link</a>
+        <a href="http://192.168.0.114:8000">Add Link</a>
 
         <% if(links){ %> 
             <% for(let i = 0; i < links.length; i++){ %> 
@@ -19,11 +19,11 @@
                     <div>
                         <h3><%= links[i].title %></h3>
                         <div><%= links[i].description %></div>
-                        <div><a href="<%= links[i].url %>"><%= links[i].url %></a></div>
+                        <div><a href="http://192.168.0.114:8000/<%= links[i].title %>"><%= links[i].url %></a></div>
                         <div>clicks: <%= links[i].clicks %> </div>
                     </div>
                     <div>
-                        <a class="btn btn-info text-light" href="http://localhost:8000/edit/<%= links[i].id %> ">Edit</a>
+                        <a class="btn btn-info text-light" href="http://192.168.0.114:8000/edit/<%= links[i].id %> ">Edit</a>
                         <button class="btn btn-danger" onclick="deleteLink('<%= links[i].id %>')">Delete</button>
                     </div>
                     <% if(err.message){ %> 

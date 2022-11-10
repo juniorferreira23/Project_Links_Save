@@ -11,7 +11,7 @@
 <body>
     <div class="container w-50">
         <h1>Edit Links</h1>
-        <a href="http://localhost:8000/all">All links</a>
+        <a href="http://192.168.0.114:8000/all">All links</a>
         
         <form action="/edit/<%= body.id %>" method="post" class="d-flex flex-column">
             <input class="mt-1" type="text" name="title" placeholder="title" value="<%= body.title %>">
