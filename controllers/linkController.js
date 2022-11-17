@@ -5,7 +5,7 @@ const redirectLink = async (req, res) => {
     try {
         const docLink = await Link.findOne({title})
         await Link.updateOne({title}, {$inc: {clicks: 1}})
-        res.status(200).redirect(docLink.url)
+        res.redirect(docLink.url)
     } catch (err) {
         res.status(404).send('<h2>Link não encontrado :(</h2></br>' + err)
     }
@@ -24,7 +24,7 @@ const addLink = async (req, res) => {
 const allLinks = async (req, res) => {
     try {
         const links = await Link.find({})
-        res.status(200).render('all', { links, err: false })
+        res.render('all', { links, err: false })
     } catch (err) {
         res.status(404).send('<h2>Links não encontrados no Banco de dados, verificar se o banco de dados foi iniciado<h2></br>' + error)
     }
@@ -34,7 +34,7 @@ const deleteLink = async (req, res) => {
     const idLink = req.params.id
     try {
         await Link.findByIdAndDelete(idLink)
-        res.status(200).send(idLink)
+        res.send(idLink)
     } catch (err) {
         res.status(404).send(err)
     }
@@ -44,7 +44,7 @@ const loadEditLink = async (req, res) => {
     const idLink = req.params.id
     try {
         const doc = await Link.findById(idLink)
-        res.status(200).render('edit', {body: doc, err: false})
+        res.render('edit', {body: doc, err: false})
     } catch (err) {
         res.status(404).send(err)
     }
